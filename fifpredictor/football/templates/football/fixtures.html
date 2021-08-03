@@ -1,0 +1,32 @@
+{% extends 'football/base.html' %} {% block content %} {% for match in matches %}
+<article class="media content-section">
+    <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">Gameweek {{ match.matchday }}</a>
+            <small class="text-muted">{{ match.lastUpdated|date:"F d, Y" }}</small>
+        </div>
+
+        <p class="article-content d-flex justify-content-center">
+            <img class="match-box" src="{{ match.homeTeam.crestUrl }}" width="40">{{ match.homeTeam.name }} {{ match.score_fullTime_homeTeam }} - {{ match.score_fullTime_awayTeam }} {{ match.awayTeam.name}}<img class="match-box" src="{{ match.awayTeam.crestUrl }}"
+                width="40">
+        </p>
+    </div>
+</article>
+{% endfor %} {% if matches.has_other_pages %}
+<ul class="pagination d-flex justify-content-center">
+    {% if matches.has_previous %}
+    <li><a href="?page={{ matches.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %} {% for i in matches.paginator.page_range %} {% if matches.number == i %}
+    <li class="active"><span>{{i}} <span class="sr-only">(current)</span></span>
+    </li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{i}}</a></li>
+    {% endif %} {% endfor %} {% if matches.has_next %}
+    <li><a href="?page={{ matches.next_page_number }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+{% endif %} {% endblock content %}

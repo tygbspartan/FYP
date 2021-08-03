@@ -1,0 +1,46 @@
+{% extends 'football/base.html' %} {% load static %} {% load widget_tweaks %} {% block content %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+<link href="{% static 'account/css/profile.css' %}" rel="stylesheet" media="all" />
+
+<div class="profile-container">
+    <div class="card">
+        <header>
+            <div class="controls">
+                <div class="controls__back">
+
+                </div>
+
+            </div>
+            <figure>
+                {% if user.userprofile.profile_pic %}
+                    <img src="{{user.userprofile.profile_pic.url}}" height="200"> 
+                {%else%}
+                    <img src="../../../media/prof.jpg" height="200"> 
+                {% endif %}
+            </figure>
+            <h1>
+                {{user.username}}
+                <span class="verification" title="Verified Bat">
+                   </span>
+            </h1>
+            <h2>{{user.userprofile.name}}</h2>
+            <p>{{user.email}}
+                <br> {{user.userprofile.phone}}
+                <br>
+
+            </p>
+
+            <a class="reqbtn" href="{% url 'edit-profile' %}">Edit Profile</a>
+
+
+
+
+    </div>
+
+
+</div>
+
+
+{% endblock %}

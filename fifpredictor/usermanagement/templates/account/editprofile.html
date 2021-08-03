@@ -1,0 +1,39 @@
+{% extends "football\base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="page-wrapper bg-blue p-t-100 p-b-100 font-robo">
+    <div class="wrapper wrapper--w680">
+        <div class="card card-1">
+            <div class="card-heading"></div>
+            
+            <div class="card-body">
+                <h2 class="title">Edit your profile</h2>
+                <p>Note: Username and Email cannot be edited.</p>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in p_form %}
+                    <br>
+                    <div class="input-group">
+                        {{field.label_tag}}
+                        {% render_field field class="input--style-1" autocomplete="off" %}
+                        
+                    </div>
+                    {% for error in field.errors %}
+                        <small style="color: red;">{{error}}</small>
+                    {% endfor %}
+                    {% endfor %}
+                    
+
+
+                    <div class="p-t-20">
+                        <button class="btn btn--radius btn--green" type="submit">Save</button>
+                    </div> 
+                    
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

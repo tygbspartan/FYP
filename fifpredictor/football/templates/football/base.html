@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FifPredictor</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="{% static 'football/main.css' %}">
+</head>
+
+<body>
+
+    <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top" style="background-color: black;">
+            <div class="container">
+                <a class="navbar-brand mr-4" href="{% url 'football-fixtures' %}">FifPredictor</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	      </button>
+                <div class="collapse navbar-collapse" id="navbarToggle">
+                    <div class="navbar-nav mr-auto">
+                        <a class="nav-item nav-link" href="{% url 'football-fixtures' %}">Fixtures and Results</a>
+                        <a class="nav-item nav-link" href="{% url 'football-standings' %}">Standings</a>
+                        <a class="nav-item nav-link" href="{% url 'football-predictions' %}">Prediction</a>
+                    </div>
+                    <!-- Navbar Right Side -->
+                    <div class="navbar-nav">
+                        <!-- <a class="nav-item nav-link" href="{% url 'user-login' %}">Login</a>
+	          <a class="nav-item nav-link" href="{% url 'user-register' %}">Register</a> -->
+                        <span><a class="nav-item nav-link" href="{% url 'user-profile' %}">Hello, {{request.user}}</a></span>
+                        <a class="nav-item nav-link" href="{% url 'user-logout' %}">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main role="main" class="container">
+        <div class="row">
+            <div class="col-md-8">
+                {% block content %}{% endblock %}
+            </div>
+            <div class="col-md-4">
+                <div class="content-section">
+                    <h3>About Us: </h3>
+                    <p class='text-muted' style="text-align: justify;">
+                        Football is one of the most watched sport across the globe. Different developers have made efforts in trying to predict the outcome of this beautiful game before the match using different algorithms and different datasets. Predicting the football match is beneficial for the football viewers in different ways but mostly during betting. In this system, Logistic Regression is used to predict the final outcome of the football matches. The dataset that was used in this system was of 10 seasons from 2010/11 to 2019/2020. In this system, only English Premier League matches are being used. In the dataset, different data that could affect the outcome of the match is used like goals scored by home team, goals scored by away team, half time scores, full time scores, corners, yellow cards, red cards, expected goals, fouls, penalties and other information as well. This system gives its final prediction as “Home Win”, “Away Win” or “Draw”.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+
+</html>

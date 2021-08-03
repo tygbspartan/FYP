@@ -1,0 +1,36 @@
+{% extends 'football/base.html' %} {% block content %}
+<table class="table table-bordered table-sm text-center">
+    <thead style="background: #fc8b21;">
+        <tr>
+            <th>#</th>
+            <th>Team</th>
+            <th title="Matches played">MP</th>
+            <th title="Wins">W</th>
+            <th title="Draws">D</th>
+            <th title="Losses">L</th>
+            <th title="Goal difference">GD</th>
+            <th title="Points">Pts</th>
+            <th title="Form">Form</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for standing in standings %} {%if standing.position|divisibleby:2%}
+        <tr style="background: rgb(255, 255, 255);">
+            {%else%}
+            <tr style="background: #ffffff;">
+                {%endif%}
+                <td>{{ standing.position }}</td>
+                <td class="text-left">{{ standing.team.name }}</td>
+                <td>{{ standing.playedGames }}</td>
+                <td>{{ standing.won }}</td>
+                <td>{{ standing.draw }}</td>
+                <td>{{ standing.lost }}</td>
+                <td>{{ standing.goalsFor }}:{{ standing.goalsAgainst }}</td>
+                <td>{{ standing.points }}</td>
+                <td>{{ standing.form }}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+{% endblock content %}

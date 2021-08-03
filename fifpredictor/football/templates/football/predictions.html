@@ -1,0 +1,53 @@
+{% extends 'football/base.html' %} {% block content %}
+<table class="table table-bordered table-sm text-center">
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+
+
+    <!-- <table class="table table-bordered"> -->
+    <thead style="background: #fc8b21;">
+        <tr>
+            <th>Matches</th>
+            <th>Home Team</th>
+            <th>Away Team</th>
+            <th title="Matches played">Result Predicted</th>
+            <!-- <th title="Wins">Away Win %</th>
+            <th title="Draws">Draw %</th>
+            <th title="Losses">Home Win %</th> -->
+        </tr>
+    </thead>
+    <tbody>
+        {% for prediction in page_obj %} {%if prediction.id|divisibleby:2%}
+        <tr style="background: rgb(255, 255, 255);">
+            {%else%}
+            <tr style="background: #ffffff;">
+                {%endif%}
+                <td>{{ prediction.id }}</td>
+                <td class="text-left">{{ prediction.home }}</td>
+                <td>{{ prediction.away }}</td>
+                <td>{{ prediction.predictedResult }}</td>
+                <!-- <td>{{ prediction.awayWinPercent }}</td>
+                <td>{{ prediction.drawPercent }}</td>
+                <td>{{ prediction.homeWinPercent }}</td> -->
+            </tr>
+            {% endfor %}
+    </tbody>
+</table>
+
+{% if page_obj.has_other_pages %}
+<ul class="pagination d-flex justify-content-center">
+    {% if page_obj.has_previous %}
+    <li><a href="?page={{ page_obj.previous_page_number }}">&laquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&laquo;</span></li>
+    {% endif %} {% for i in page_obj.paginator.page_range %} {% if page_obj.number == i %}
+    <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span>
+    </li>
+    {% else %}
+    <li><a href="?page={{ i }}">{{ i }}</a></li>
+    {% endif %} {% endfor %} {% if page_obj.has_next %}
+    <li><a href="?page={{ page_obj.next_page_number }}">&raquo;</a></li>
+    {% else %}
+    <li class="disabled"><span>&raquo;</span></li>
+    {% endif %}
+</ul>
+{% endif %} {% endblock content %}
